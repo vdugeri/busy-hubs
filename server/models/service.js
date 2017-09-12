@@ -1,25 +1,12 @@
 'use strict';
-
 module.exports = (Sequelize, DataTypes) => {
-  const Service = Sequelize.define('services', {
+  const Service = Sequelize.define('Service', {
     id: { type: DataTypes.UUID, unique: true, primaryKey: true, defaultValue: DataTypes.UUIDV4 },
     name: { type: DataTypes.STRING}
   }, {
     underscored: true,
-    instanceMethods: {
-      toJson() {
-        let value = this.get();
-        return value;
-      }
-    },
-    classMethods: {
-      associate(models) {
-        Service.belongsToMany(models.Business, {
-          through: 'BusinessService'
-        });
-      }
-    }
-  })
+    tableName: 'services'
+  });
 
   return Service;
-}
+};

@@ -33,4 +33,20 @@ Object.keys(db).forEach(function(modelName) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+db.Report.belongsTo(db.Business);
+db.Business.hasMany(db.Service);
+db.Business.hasMany(db.Rating);
+db.Business.belongsTo(db.User);
+db.Service.belongsToMany(db.Business, {
+    as: 'BusinessService',
+    through: 'business_services'
+});
+
+db.Rating.belongsToMany(db.Business, {
+    'as': 'BusinessRating',
+    through: 'business_ratings'
+});
+
+db.User.hasMany(db.Business);
+
 module.exports = db;

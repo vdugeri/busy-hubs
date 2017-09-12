@@ -1,10 +1,11 @@
 {
   "development": {
-    "username": "root",
-    "password": "danverem",
-    "database": "busyhub",
+    "username": "postgres",
+    "password": "",
+    "database": "busyhubs",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres",
+    "logging": false
   },
   "test": {
     "username": "root",
