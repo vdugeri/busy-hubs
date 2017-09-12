@@ -4,7 +4,6 @@ const exit = require('gulp-exit');
 const istanbul = require('gulp-istanbul');
 const mocha = require('gulp-mocha');
 const coveralls = require('gulp-coveralls');
-const browserify = require('browserify');
 const fs = require('fs');
 const babelify = require('babelify');
 const jshint = require('gulp-jshint');
@@ -40,14 +39,6 @@ gulp.task('server:test',['db:sync', 'coverage-setup'], function () {
 gulp.task('coveralls', () => {
   return gulp.src('./test/coverage/lcov.info')
     .pipe(coveralls());
-});
-
-gulp.task('build', () => {
-  return browserify('./app/main.js')
-    .transform(babelify)
-    .transform('vueify')
-    .bundle()
-    .pipe(fs.createWriteStream('./dist/bundle.js'));
 });
 
 gulp.task('jshint', () => {
