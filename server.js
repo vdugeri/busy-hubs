@@ -17,7 +17,7 @@ app.use(cors());
 routes(app);
 
 let migrateDB = () => {
-  models.sequelize.sync().then(() => {
+  models.sequelize.sync({ force: true }).then(() => {
     console.log('Database tables migrated');
   });
 }
