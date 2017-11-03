@@ -42,6 +42,9 @@ db.Service.belongsToMany(db.Business, {
     through: 'business_services'
 });
 
+db.Location.belongsTo(db.Business);
+db.Business.hasMany(db.Location);
+
 db.Rating.belongsToMany(db.Business, {
     'as': 'BusinessRating',
     through: 'business_ratings'
