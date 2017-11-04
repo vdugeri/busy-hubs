@@ -7,7 +7,6 @@ const istanbul = require('gulp-istanbul');
 const mocha = require('gulp-mocha');
 const coveralls = require('gulp-coveralls');
 const fs = require('fs');
-const jshint = require('gulp-jshint');
 const nodemon = require('gulp-nodemon');
 
 

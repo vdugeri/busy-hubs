@@ -19,8 +19,7 @@ const create = (req, res) => {
     models.Business.create(business).then(business => {
       return res.status(201).json(business);
     }).catch(err => {
-      const error = err.errors[0];
-      res.status(500).json({ error: error.message });
+      return res.status(500).json({ error: err.message });
     });
 };
 

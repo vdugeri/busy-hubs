@@ -65,5 +65,5 @@ module.exports = {
   create,
   find,
   update,
-  destroy,
+  //destroy,
 }
