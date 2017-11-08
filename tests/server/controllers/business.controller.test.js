@@ -4,6 +4,7 @@ const controllers = require('../../../server/controllers');
 const httpMocks = require('node-mocks-http');
 const should = require('should');
 const models = require('../../../server/models');
+const Q = require('q');
 
 const businessController = controllers.businessController;
 
@@ -131,8 +132,6 @@ describe('Business controller', () => {
         done();
       });
     });
-
-    it('should')
   });
 
   describe('#destroy', () => {
@@ -148,6 +147,65 @@ describe('Business controller', () => {
         res.statusCode.should.equal(200);
         const data = JSON.parse(res._getData());
         data.message.should.equal(success.message);
+        done();
+      });
+    });
+  });
+
+  describe('Find business error', () => {
+    const findById = models.Business.findById;
+    // const create = models.Business.create;
+
+    const defered = Q.defer();
+
+    before(() => {
+      models.Business.findById = () => defered.promise;
+      defered.reject(error);
+    });
+
+    after(() => {
+      models.Business.findById = findById;
+    });
+
+    it('should return a 500 when find fails', done => {
+      const req = httpMocks.createRequest({
+        params: {
+          id,
+        },
+      });
+      businessController.find(req, res);
+      res.on('end', () => {
+        res.statusCode.should.equal(500);
+        done();
+      });
+    });
+  });
+
+  describe('Update business erorr', () => {
+    const findById = models.Business.findById;
+    const defered = Q.defer();
+
+    before(() => {
+      models.Business.findById = () => defered.promise;
+      defered.reject(error);
+    });
+
+    after(() => {
+      models.Business.findById = findById;
+    });
+
+    it('should return a 500 when update fails',done => {
+      const req = httpMocks.createRequest({
+        params: {
+          id,
+        },
+        body: mockBusiness,
+      });
+
+      businessController.update(req, res);
+
+      res.on('end', () => {
+        res.statusCode.should.equal(500);
         done();
       });
     });

@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">80% </span>
+        <span class="strong">83.78% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>28/35</span>
+        <span class='fraction'>31/37</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">83.33% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">80% </span>
+        <span class="strong">83.78% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>28/35</span>
+        <span class='fraction'>31/37</span>
       </div>
     </div>
   </div>
@@ -121,13 +121,17 @@
 76
 77
 78
-79</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+79
+80
+81</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -147,32 +151,32 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-yes">2×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -204,8 +208,10 @@ const models = require('../models');
 &nbsp;
 const index = (req, res) =&gt; {
   models.Business.findAll().then(businesses =&gt; {
+    console.log('here');
     return res.status(200).json(businesses);
   }).catch(error =&gt; {
+<span class="cstat-no" title="statement not covered" >    console.log('error', error);</span>
 <span class="cstat-no" title="statement not covered" >    return res.status(500).json(error);</span>
   });
 };
@@ -232,7 +238,7 @@ const find = (req, res) =&gt; {
     }
     return res.status(404).json({ message: 'Business not found' });
   }).catch(error =&gt; {
-<span class="cstat-no" title="statement not covered" >    return res.status(500).json(error);</span>
+    return res.status(500).json(error);
   });
 };
 &nbsp;
@@ -250,7 +256,7 @@ const update = (req, res) =&gt; {
       return res.status(404).json({ error: 'Business not found' });
     }
   }).catch(error =&gt; {
-<span class="cstat-no" title="statement not covered" >    return res.status(500).json({ error })</span>
+    return res.status(500).json({ error })
   });
 };
 &nbsp;
@@ -283,7 +289,7 @@ module.exports = {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Nov 04 2017 16:28:33 GMT+0100 (WAT)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Nov 07 2017 17:07:17 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../prettify.js"></script>

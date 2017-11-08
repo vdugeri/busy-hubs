@@ -5,4 +5,5 @@ const locationController = require('./location.controller')
 module.exports = {
   businessController,
   userController,
+  locationController,
 };
