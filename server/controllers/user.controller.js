@@ -3,21 +3,38 @@
 const models = require('../models');
 const lodash = require('lodash');
 
+
+
+module.exports = {
+  index,
+  create,
+  find,
+  update,
+  destroy,
+};
+
 const index = (req, res) => {
   models.User.findAll().then(users => {
     return res.status(200).json(users);
   }).catch(err => {
+    console.log(err);
     return res.status(500).json({ error: err.message });
   });
 };
 
 const create = (req, res) => {
-  const user = lodash.pick(req.body, ['emailAddress', 'password']);
+  const { body } = req;
+  const { emailAddress, password } = body;
 
-  models.User.create(user).then(user => {
-    return res.status(200).json(user);
+  const user = {
+    emailAddress,
+    password,
+  };
+
+  models.User.create(user).then(newUser => {
+    return res.status(200).json(newUser.toJson());
   }).catch(err => {
-    return res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: 'Unable to create user. Please try again' });
   });
 };
 
@@ -68,12 +85,4 @@ const destroy = (req, res) => {
   }).catch(err => {
     return res.status(500).json({ error: err.message });
   });
-};
-
-module.exports = {
-  index,
-  create,
-  find,
-  update,
-  destroy,
 };

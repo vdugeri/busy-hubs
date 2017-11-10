@@ -25,12 +25,14 @@ describe('Business controller', () => {
     res = httpMocks.createResponse({
       eventEmitter: require('events').EventEmitter
     });
-    models.Business.create(mockBusiness).then(business => {
-      id = business.id;
-      done();
-    }).catch(err => {
-      throw err;
-    });
+    models.sequelize.sync({ force: true}).then(() => {
+      models.Business.create(mockBusiness).then(business => {
+        id = business.id;
+        done();
+      }).catch(err => {
+        throw err;
+      });
+    })
   });
 
   afterEach(done => {

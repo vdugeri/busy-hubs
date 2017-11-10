@@ -30,11 +30,12 @@
     "jshint": "2.0.1",
     "lodash": "4.17.4",
     "morgan": "1.8.2",
+    "mysql": "2.15.0",
     "mysql2": "1.4.2",
     "nodemon": "1.11.0",
     "pg": "7.3.0",
     "q": "1.5.1",
-    "sequelize": "4.8.0"
+    "sequelize": "3.30.2"
   },
   "devDependencies": {
     "gulp-coveralls": "0.1.4",

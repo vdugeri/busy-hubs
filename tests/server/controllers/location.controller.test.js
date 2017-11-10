@@ -29,18 +29,20 @@ describe('location controller test', () => {
       eventEmitter: require('events').EventEmitter
     });
 
-    models.Business.create(mockBusiness).then(business => {
-      bid = business.id;
-      mockLocation.business_id = bid;
-      models.Location.create(mockLocation).then(location => {
-        id = location.id;
-        done();
+    models.sequelize.sync({ force: true}).then(() => {
+      models.Business.create(mockBusiness).then(business => {
+        bid = business.id;
+        mockLocation.business_id = bid;
+        models.Location.create(mockLocation).then(location => {
+          id = location.id;
+          done();
+        }).catch(err => {
+          throw err;
+        })
       }).catch(err => {
         throw err;
-      })
-    }).catch(err => {
-      throw err;
-    });
+      });
+    })
   });
 
   afterEach(done => {
