@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">40% </span>
+        <span class="strong">66.67% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>8/20</span>
-      </div>
-      <div class='fl pad1y space-right2'>
-        <span class="strong">16.67% </span>
-        <span class="quiet">Branches</span>
-        <span class='fraction'>1/6</span>
+        <span class='fraction'>12/18</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
-        <span class="quiet">Functions</span>
+        <span class="quiet">Branches</span>
         <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">40% </span>
+        <span class="strong">50% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">66.67% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>8/20</span>
+        <span class='fraction'>12/18</span>
       </div>
     </div>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -87,11 +87,7 @@
 42
 43
 44
-45
-46
-47
-48
-49</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+45</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
@@ -104,18 +100,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -123,17 +119,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -151,37 +143,33 @@ module.exports = (Sequelize, DataTypes) =&gt; {
       underscored: true,
       tableName: 'users',
       instanceMethods: {
-        toJson<span class="fstat-no" title="function not covered" >() {</span>
-<span class="cstat-no" title="statement not covered" >          let value = this.get();</span>
-<span class="cstat-no" title="statement not covered" >          delete value.password;</span>
-<span class="cstat-no" title="statement not covered" >          return value;</span>
+        toJson () {
+          let value = this.get();
+          delete value.password;
+          return value;
+        },
+        matchPasswords <span class="fstat-no" title="function not covered" >(candidatePassword, hash) {</span>
+<span class="cstat-no" title="statement not covered" >          return new Promise((resolve, reject) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            bcrypt.compare(candidatePassword, hash, (err, matched) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >              if (err) {</span>
+<span class="cstat-no" title="statement not covered" >                reject(err);</span>
+              } else {
+<span class="cstat-no" title="statement not covered" >                resolve(matched);</span>
+              }
+            });
+          });
         }
       },
-      matchPasswords<span class="fstat-no" title="function not covered" >(candidatePassword, hash) {</span>
-<span class="cstat-no" title="statement not covered" >        return new Promise((resolve, reject) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >          bcrypt.compare(candidatePassword, hash, (err, matched) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >            if (err) {</span>
-<span class="cstat-no" title="statement not covered" >              reject(err);</span>
-            } else {
-<span class="cstat-no" title="statement not covered" >              resolve(matched);</span>
-            }
-          });
-        });
-      }
     });
 &nbsp;
   User.beforeCreate((user, options, next) =&gt; {
-    bcrypt.genSalt(10, (err, salt) =&gt; {
-      <span class="missing-if-branch" title="else path not taken" >E</span>if (!err) {
-        bcrypt.hash(user.password, salt, (error, hash) =&gt; {
-<span class="cstat-no" title="statement not covered" >          if (error) {</span>
-<span class="cstat-no" title="statement not covered" >            next(err);</span>
-          } else {
-<span class="cstat-no" title="statement not covered" >            user.password = hash;</span>
-<span class="cstat-no" title="statement not covered" >            next(null, options);</span>
-          }
-        });
-      }
+    bcrypt.genSalt(10).then(salt =&gt; {
+      bcrypt.hash(user.password, salt).then(hash =&gt; {
+        user.password = hash;
+        next(null, user);
+      });
+    }).catch(err =&gt; {
+<span class="cstat-no" title="statement not covered" >      next(err);</span>
     });
   });
 &nbsp;
@@ -193,7 +181,7 @@ module.exports = (Sequelize, DataTypes) =&gt; {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Nov 08 2017 13:24:01 GMT+0100 (WAT)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Nov 15 2017 22:57:36 GMT+0100 (WAT)
 </div>
 </div>
 <script src="../prettify.js"></script>

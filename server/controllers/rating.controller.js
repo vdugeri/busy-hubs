@@ -1,6 +1,5 @@
 const models = require('../models');
 
-
 module.exports = {
   index,
   create,

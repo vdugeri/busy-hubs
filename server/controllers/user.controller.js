@@ -3,21 +3,10 @@
 const models = require('../models');
 const lodash = require('lodash');
 
-
-
-module.exports = {
-  index,
-  create,
-  find,
-  update,
-  destroy,
-};
-
 const index = (req, res) => {
   models.User.findAll().then(users => {
     return res.status(200).json(users);
   }).catch(err => {
-    console.log(err);
     return res.status(500).json({ error: err.message });
   });
 };
@@ -54,13 +43,12 @@ const update = (req, res) => {
   const id = req.params.id;
   models.User.findById(id).then(user => {
     if (user) {
-      const _user = lodash.pick(req.bpdy, ['emailAddress']);
+      const _user = lodash.pick(req.body, ['emailAddress']);
       const { emailAddress } = _user;
       const oldEmail = user.emailAddress;
 
-      if (emailAddress) {
-        utils.ChangeEmailAdress(oldEmail, emailAddress); //TODO: create util to change email and password
-      }
+      //TODO: create util to change email and password
+
       user.emailAddress = emailAddress;
 
       return res.status(200).json(user);
@@ -80,9 +68,19 @@ const destroy = (req, res) => {
       user.destroy();
       return res.status(200).json({ message: 'User deleted' });
     } else {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ error: 'User already deleted' });
     }
   }).catch(err => {
     return res.status(500).json({ error: err.message });
   });
+};
+
+
+
+module.exports = {
+  index,
+  create,
+  find,
+  update,
+  destroy,
 };
