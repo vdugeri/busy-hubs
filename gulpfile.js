@@ -1,3 +1,5 @@
+'use strict';
+
 const gulp = require('gulp');
 const models = require('./server/models');
 const exit = require('gulp-exit');
@@ -5,13 +7,11 @@ const istanbul = require('gulp-istanbul');
 const mocha = require('gulp-mocha');
 const coveralls = require('gulp-coveralls');
 const fs = require('fs');
-const babelify = require('babelify');
-const jshint = require('gulp-jshint');
 const nodemon = require('gulp-nodemon');
 
 
 const paths = {
-  serverTest: './test/server/**/*.js',
+  serverTest: './tests/server/**/*.js',
   serverFiles: './server/**/*.js',
   js: ['./server/**/*.js']
 };
@@ -29,22 +29,18 @@ gulp.task('db:sync', () => {
 gulp.task('server:test',['db:sync', 'coverage-setup'], function () {
   process.env.NODE_ENV = 'test';
   process.env.APP_KEY='7kaVAaNj4ON1xbt6MQkki4ILzzMaKaVD';
+
   return gulp.src(paths.serverTest)
     .pipe(mocha())
     .pipe(istanbul.writeReports({
-      dir: './test/coverage',
-    }));
+      dir: './tests/coverage',
+    }))
+    .pipe(exit());
 });
 
 gulp.task('coveralls', () => {
-  return gulp.src('./test/coverage/lcov.info')
+  return gulp.src('./tests/coverage/lcov.info')
     .pipe(coveralls());
-});
-
-gulp.task('jshint', () => {
-  return gulp.src(paths.js)
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
 });
 
 gulp.task('nodemon', () => {

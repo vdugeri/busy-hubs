@@ -1,0 +1,28 @@
+language: node_js
+node_js:
+  - "6"
+  - "5"
+env:
+ - NODE_ENV=test
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
+      - xvfb
+      - libgnome-keyring-dev
+services:
+  - mysql
+before_install:
+    - npm install -g npm@latest
+    - mysql -e 'CREATE DATABASE busyhubs_test;'
+install:
+  - export CXX="g++-4.8"
+  - export DISPLAY=':99.0'
+  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+  - npm install
+before_script:
+  - npm install -g gulp
+script:
+  - gulp test
