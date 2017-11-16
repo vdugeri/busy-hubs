@@ -12,8 +12,11 @@ addons:
       - g++-4.8
       - xvfb
       - libgnome-keyring-dev
+services:
+  - mysql
 before_install:
     - npm install -g npm@latest
+    - mysql -e 'CREATE DATABASE busyhubs_test;'
 install:
   - export CXX="g++-4.8"
   - export DISPLAY=':99.0'
