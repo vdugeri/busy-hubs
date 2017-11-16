@@ -9,7 +9,7 @@
   },
   "test": {
     "username": "root",
-    "password": "",
+    "password": "danverem",
     "database": "busyhubs_test",
     "host": "127.0.0.1",
     "dialect": "mysql",
