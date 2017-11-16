@@ -23,7 +23,6 @@ install:
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
   - npm install
 before_script:
-  - psql -c 'create database busyhubs_test;' -U postgres
   - npm install -g gulp
 script:
   - gulp test
